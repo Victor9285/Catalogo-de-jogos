@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\victo\\OneDrive - FUNDAÇÃO MOVIMENTO DIREITO E CIDADANIA\\Bibliotecas\\gson-2.14.0.jar",
+        "c:\\Users\\victo\\Documents\\gson-2.14.0.jar"
+    ]
+}
