@@ -31,5 +31,16 @@ public class Biblioteca {
         }
     }
 
+    public void removerJogo(String nomeDoJogo){
+        for (Jogo jogo : listaDeJogos) {
+                if (jogo.getname().equalsIgnoreCase(nomeDoJogo)) {
+                    listaDeJogos.remove(jogo);
+                    System.out.println("Jogo removido!");
+                } else {
+                    System.out.println("Jogo nao encontrado!");
+                }
+        }
+    }
+
 
 }

@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 
 public class API {
     private String json;
-
+    String apiKey = System.getenv("RAWG_API_KEY");
     Gson gson = new Gson();
 
     public String requisicao(String nome) {
@@ -16,7 +16,6 @@ public class API {
             if (nome.contains(" ")) {
                 nome = nome.replace(" ", "+");
             }
-            String apiKey = System.getenv("RAWG_API_KEY");
             String endereco = "https://api.rawg.io/api/games?key=" + apiKey + "&search=" + nome
                     + "&search_precise=true";
 
@@ -37,9 +36,32 @@ public class API {
     }
 
     public PesquisaJogo filtraJogo() {
-        RespostaJogo resposta = gson.fromJson(json, RespostaJogo.class); //vai entrar no gson, e pegar somente o results
-        PesquisaJogo jogo = resposta.results().get(0); //vai entrar nesse results, e vai pegar somente o nome e released que a gente quer
+        RespostaJogo resposta = gson.fromJson(json, RespostaJogo.class); // vai entrar no gson, e pegar somente o
+                                                                         // results
+        PesquisaJogo jogo = resposta.results().get(0); // vai entrar nesse results, e vai pegar somente o nome e
+                                                       // released que a gente quer
         return jogo;
+    }
+
+    public void buscarPorGenero(String nomeGenero) {
+        if (nomeGenero.contains(" ")) {
+            nomeGenero = nomeGenero.replace(" ", "+");
+        }
+        Biblioteca biblioteca = new Biblioteca();
+        if (biblioteca.listaDeJogos.isEmpty()) {
+            System.out.println("Biblioteca vazia");
+            return;
+        }
+        PesquisaJogo jogo = filtraJogo(); // esta pegando somente o jogo 1, no caso, estamos supondo que ele e o
+                                          // principal que a gente quer
+        System.out.println("Jogo: " + jogo.name()); // devovelndo o nome do jogo 1
+        System.out.println("Generos:");
+
+        for (Genero genero : jogo.genres()) { // vai pegar a genero dentro do meu results, e vai somente mostrar os que
+                                              // estao dentro do meu jogo 1
+            System.out.println(genero.name());
+        }
+
     }
 
 }
